@@ -10,37 +10,49 @@ const cellParent = document.querySelector(".row");
 let difficultyValue;
 
 difficultyBtn.addEventListener("click", function () {
-    difficultyValue = document.querySelector(".controlsContainer>select");
+    difficultyValue = document.querySelector(".controlsContainer>select").value;
+    gameStart(convertDiffToValue(difficultyValue));
+
 });
 
+function gameStart(convertedDifficulty) {
+    createGrid(convertedDifficulty, cellParent);
+    createBombs(convertedDifficulty);
+}
 
-
-createGrid(difficulty);
 
 function convertDiffToValue(valueToConvert) {
     if (valueToConvert == "easy") {
         return 1;
-    } else if (divider == 2) {
+    } else if (valueToConvert == "normal") {
         return 2;
-    } else if (divider == 3) {
+    } else if (valueToConvert == "hard") {
         return 3;
     }
 }
 
-function createGrid(divider) {
+function randomNumberInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function createGrid(difficulty, gridContainer) {
 
     let swapSize;
     let cellNumbers;
-    if (divider == 1) {
+    gridContainer.innerHTML = "";
+
+    if (difficulty == 1) {
         swapSize = "grid_cell timesTen";
         cellNumbers = 100;
-    } else if (divider == 2) {
+    } else if (difficulty == 2) {
         swapSize = "grid_cell timesNine";
         cellNumbers = 81;
-    } else if (divider == 3) {
+    } else if (difficulty == 3) {
         swapSize = "grid_cell timesSeven";
         cellNumbers = 49;
     }
+
     for (let i = 0; i < cellNumbers; i++) {
         const cell = document.createElement("div");
 
@@ -53,3 +65,13 @@ function createGrid(divider) {
         });
     }
 }
+
+function createBombs(difficulty) {
+    const bombs = [];
+    while (bombs.length < 16) {
+
+
+
+    }
+}
+
