@@ -68,10 +68,23 @@ function createGrid(difficulty, gridContainer) {
 
 function createBombs(difficulty) {
     const bombs = [];
-    while (bombs.length < 16) {
+    let max;
 
-
-
+    if (difficulty == 1) {
+        max = 100;
+    } else if (difficulty == 2) {
+        max = 81;
+    } else if (difficulty == 3) {
+        max = 49;
     }
+
+    while (bombs.length < 16) {
+        let randomNumber = randomNumberInRange(1, max);
+
+        if (!bombs.includes(randomNumber)) {
+            bombs.push(randomNumber);
+        }
+    }
+    console.log(bombs);
 }
 
