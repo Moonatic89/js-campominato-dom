@@ -44,32 +44,7 @@ function createGrid(divider) {
         cellParent.append(cell);
 
         cell.addEventListener("click", function () {
-            if (this.classList.contains("azure")) {
-                this.classList.remove("azure");
-            } else {
-                this.classList.add("azure");
-            }
+            this.classList.add("azure");
         });
     }
 }
-
-/*
-function getRandomNumberByDifficulty(difficultyToRange) {
-
-    if (difficultyToRange == 1) {
-        //1..100
-        return (Math.floor(Math.random() * 100) + 1);
-    } else if (difficultyToRange == 2) {
-        //1..81
-        return (Math.floor(Math.random() * 81) + 1);
-    } else if (difficultyToRange == 3) {
-        //1..49
-        return (Math.floor(Math.random() * 49) + 1);
-    } else {
-        alert("Invalid number. Please try again.")
-    }
-
-}
-*/
-
-
