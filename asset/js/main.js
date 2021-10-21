@@ -8,6 +8,7 @@ succesful clicks and the rest of the bombs position.
 const difficultyBtn = document.querySelector(".controlsContainer>button");
 const cellParent = document.querySelector(".row");
 const bombs = [];
+let debugNotClick = false;
 let difficultyValue;
 let successfulClicks = 0;
 
@@ -32,6 +33,7 @@ function randomNumberInRange(min, max) {
 }
 
 function gameStart(convertedDifficulty) {
+    debugNotClick = false;
     createBombs(convertedDifficulty);
     createGrid(convertedDifficulty, cellParent);
 }
@@ -64,16 +66,23 @@ function createGrid(difficulty, gridContainer) {
 
         cell.addEventListener("click", function () {
 
-            if (bombs.includes(parseInt(this.innerHTML)))
-                endGame(gridContainer);
-            // console.log("you were safe for " + successfulClicks)
-            else {
-                successfulClicks++;
-                this.classList.add("azure");
-            }
-
-        });
+            handleMouseEvent(this, gridContainer);
+        })
     }
+}
+
+function handleMouseEvent(cell, container) {
+    if (!debugNotClick) {
+
+        if (bombs.includes(parseInt(cell.innerHTML))) {
+            endGame(container);
+            // console.log("you were safe for " + successfulClicks)
+        } else {
+            successfulClicks++;
+            cell.classList.add("azure");
+        }
+    }
+
 }
 
 function createBombs(difficulty) {
@@ -99,16 +108,24 @@ function createBombs(difficulty) {
     console.log(bombs);
 }
 
-
 function endGame(gridContainer) {
-    console.log("PENI");
 
+    //Reveal Bombs
     for (let i = 0; i < 16; i++) {
         const bombReveal = gridContainer.childNodes[(bombs[i] - 1)];
         bombReveal.classList.add("crimson");
-
     }
 
-    alert(`You lost! you succesfully clicked ${successfulClicks} empty spots!`)
+    //Remove event listener
+    debugNotClick = true;
+
+    /*
+    for (let i = 0; i < 100; i++) {
+        const cell = gridContainer.childNodes[i];
+        console.log(cell);
+        //cell.removeEventListener("click", handleMouseEvent);
+    }
+*/
+    //  alert(`You lost! you succesfully clicked ${successfulClicks} empty spots!`)
 
 }
