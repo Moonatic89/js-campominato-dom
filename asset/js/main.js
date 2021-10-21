@@ -11,11 +11,21 @@ let difficultyValue;
 
 difficultyBtn.addEventListener("click", function () {
     difficultyValue = document.querySelector(".controlsContainer>select");
-    console.log(difficultyValue.value);
 });
+
+
 
 createGrid(difficulty);
 
+function convertDiffToValue(valueToConvert) {
+    if (valueToConvert == "easy") {
+        return 1;
+    } else if (divider == 2) {
+        return 2;
+    } else if (divider == 3) {
+        return 3;
+    }
+}
 
 function createGrid(divider) {
 
