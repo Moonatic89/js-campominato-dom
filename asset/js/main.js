@@ -65,9 +65,10 @@ function createGrid(difficulty, gridContainer) {
         cell.addEventListener("click", function () {
 
             if (bombs.includes(parseInt(this.innerHTML)))
-                this.classList.add("crimson");
+                endGame(gridContainer);
+            // console.log("you were safe for " + successfulClicks)
             else {
-
+                successfulClicks++;
                 this.classList.add("azure");
             }
 
@@ -98,3 +99,16 @@ function createBombs(difficulty) {
     console.log(bombs);
 }
 
+
+function endGame(gridContainer) {
+    console.log("PENI");
+
+    for (let i = 0; i < 16; i++) {
+        const bombReveal = gridContainer.childNodes[(bombs[i] - 1)];
+        bombReveal.classList.add("crimson");
+
+        //gameStart(convertDiffToValue(difficultyValue));
+
+    }
+
+}
