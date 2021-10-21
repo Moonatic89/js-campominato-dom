@@ -7,6 +7,7 @@ succesful clicks and the rest of the bombs position.
 
 const difficultyBtn = document.querySelector(".controlsContainer>button");
 const cellParent = document.querySelector(".row");
+const result = document.querySelector("header>h1");
 const bombs = [];
 let debugNotClick = false;
 let difficultyValue;
@@ -14,7 +15,7 @@ let successfulClicks = 0;
 
 difficultyBtn.addEventListener("click", function () {
     difficultyValue = document.querySelector(".controlsContainer>select").value;
-    gameStart(convertDiffToValue(difficultyValue));
+    gameStart(convertDiffToValue(difficultyValue), result);
 
 });
 
@@ -32,8 +33,9 @@ function randomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function gameStart(convertedDifficulty) {
+function gameStart(convertedDifficulty, result) {
     debugNotClick = false;
+    result.innerHTML = "";
     createBombs(convertedDifficulty);
     createGrid(convertedDifficulty, cellParent);
 }
@@ -75,7 +77,7 @@ function handleMouseEvent(cell, container) {
     if (!debugNotClick) {
 
         if (bombs.includes(parseInt(cell.innerHTML))) {
-            endGame(container);
+            endGame(container, result);
             // console.log("you were safe for " + successfulClicks)
         } else {
             successfulClicks++;
@@ -108,7 +110,7 @@ function createBombs(difficulty) {
     console.log(bombs);
 }
 
-function endGame(gridContainer) {
+function endGame(gridContainer, result) {
 
     //Reveal Bombs
     for (let i = 0; i < 16; i++) {
@@ -118,6 +120,9 @@ function endGame(gridContainer) {
 
     //Remove event listener
     debugNotClick = true;
+
+    result.innerHTML = `
+Nice try! You found ${successfulClicks} empty spots! Click Play to restart.`
 
     /*
     for (let i = 0; i < 100; i++) {
