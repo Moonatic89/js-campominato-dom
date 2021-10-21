@@ -107,8 +107,8 @@ function endGame(gridContainer) {
         const bombReveal = gridContainer.childNodes[(bombs[i] - 1)];
         bombReveal.classList.add("crimson");
 
-        //gameStart(convertDiffToValue(difficultyValue));
-
     }
+
+    alert(`You lost! you succesfully clicked ${successfulClicks} empty spots!`)
 
 }
