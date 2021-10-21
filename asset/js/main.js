@@ -7,19 +7,15 @@ succesful clicks and the rest of the bombs position.
 
 const difficultyBtn = document.querySelector(".controlsContainer>button");
 const cellParent = document.querySelector(".row");
+const bombs = [];
 let difficultyValue;
+let successfulClicks = 0;
 
 difficultyBtn.addEventListener("click", function () {
     difficultyValue = document.querySelector(".controlsContainer>select").value;
     gameStart(convertDiffToValue(difficultyValue));
 
 });
-
-function gameStart(convertedDifficulty) {
-    createGrid(convertedDifficulty, cellParent);
-    createBombs(convertedDifficulty);
-}
-
 
 function convertDiffToValue(valueToConvert) {
     if (valueToConvert == "easy") {
@@ -35,9 +31,14 @@ function randomNumberInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function gameStart(convertedDifficulty) {
+    createBombs(convertedDifficulty);
+    createGrid(convertedDifficulty, cellParent);
+}
 
 function createGrid(difficulty, gridContainer) {
 
+    successfulClicks = 0;
     let swapSize;
     let cellNumbers;
     gridContainer.innerHTML = "";
@@ -53,6 +54,7 @@ function createGrid(difficulty, gridContainer) {
         cellNumbers = 49;
     }
 
+    //let
     for (let i = 0; i < cellNumbers; i++) {
         const cell = document.createElement("div");
 
@@ -61,13 +63,21 @@ function createGrid(difficulty, gridContainer) {
         cellParent.append(cell);
 
         cell.addEventListener("click", function () {
-            this.classList.add("azure");
+
+            if (bombs.includes(parseInt(this.innerHTML)))
+                this.classList.add("crimson");
+            else {
+
+                this.classList.add("azure");
+            }
+
         });
     }
 }
 
 function createBombs(difficulty) {
-    const bombs = [];
+    bombs.length = 0;
+
     let max;
 
     if (difficulty == 1) {
