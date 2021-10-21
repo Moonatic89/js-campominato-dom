@@ -8,36 +8,56 @@ body {
     background-color: grey;
 }
 
+header, footer {
+    height: 80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+header {
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+footer {
+    justify-content: center;
+}
+
+.imageContainer>img {
+    height: 80px;
+    padding: 1rem 0;
+}
+
 .row {
     width: 630px;
+    padding: 2rem;
+    height: calc(100vh - 160px);
     margin: auto;
-    margin-top: 5rem;
     display: flex;
     flex-wrap: wrap;
 }
 
 .grid_cell {
     border: 1px solid white;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timesTen {
-    width: 63px;
-    height: 63px;
-    line-height: 63px;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
 }
 
 .timesNine {
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
+    width: calc(100% / 9);
+    height: calc(100% / 9);
 }
 
 .timesSeven {
-    width: 90px;
-    height: 90px;
-    line-height: 90px;
+    width: calc(100% / 7);
+    height: calc(100% / 7);
 }
 
 .azure {
